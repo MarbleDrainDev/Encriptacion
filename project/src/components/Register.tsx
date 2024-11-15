@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserPlus, ArrowLeft } from 'lucide-react';
 import toast from 'react-hot-toast';
+import axios from 'axios';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -12,15 +13,30 @@ const Register = () => {
     password: '',
     confirmPassword: '',
   });
+  const [error, setError] = useState<string>('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validar si las contraseñas coinciden
     if (formData.password !== formData.confirmPassword) {
-      toast.error('Passwords do not match!');
+      setError('Las contraseñas no coinciden');
       return;
     }
-    // API call would go here
-    toast.success('Registration functionality will be connected to the API');
+
+    try {
+      // Realizar la llamada a la API para registrar al usuario
+      const response = await axios.post('http://localhost:7096/api/User/register', {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password, // Solo enviar la contraseña
+      });
+
+      toast.success('¡Registro exitoso!');
+      navigate('/'); // Redirigir al inicio o página de login después del registro exitoso
+    } catch (error) {
+      toast.error('¡Error al registrar! Por favor, intenta de nuevo.');
+    }
   };
 
   return (
@@ -91,6 +107,9 @@ const Register = () => {
                 required
               />
             </div>
+
+            {/* Mostrar mensaje de error si las contraseñas no coinciden */}
+            {error && <p className="text-red-500 text-sm">{error}</p>}
 
             <motion.button
               whileHover={{ scale: 1.05 }}

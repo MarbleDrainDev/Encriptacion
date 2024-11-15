@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
-using Encriptar.Classes; // Asegúrate de que esta ruta sea correcta
+using Encriptar.Classes; 
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -52,9 +52,9 @@ namespace Encriptar.Controllers
                 return BadRequest("Correo y contraseña son requeridos.");
             }
 
-            // Buscar la contraseña cifrada del usuario en la base de datos
             string storedEncryptedPassword = null;
 
+            // Buscar la contraseña cifrada del usuario en la base de datos
             using (var connection = new MySqlConnection(connectionString))
             {
                 await connection.OpenAsync();
@@ -80,11 +80,11 @@ namespace Encriptar.Controllers
                 return Unauthorized("Correo o contraseña incorrectos.");
             }
 
-            // Desencriptar la contraseña almacenada
-            string decryptedPassword = _encryptor.Decrypt(storedEncryptedPassword);
+            // Encriptar la contraseña ingresada con el mismo método
+            string encryptedInputPassword = _encryptor.Encrypt(login.Password);
 
-            // Comparar la contraseña desencriptada con la que el usuario ingresó
-            if (decryptedPassword != login.Password)
+            // Comparar la contraseña cifrada ingresada con la almacenada
+            if (storedEncryptedPassword != encryptedInputPassword)
             {
                 return Unauthorized("Correo o contraseña incorrectos.");
             }
@@ -92,6 +92,7 @@ namespace Encriptar.Controllers
             // Si el login es exitoso, retornamos el correo del usuario
             return Ok(new { Email = login.Email });
         }
+
 
 
         [HttpGet]

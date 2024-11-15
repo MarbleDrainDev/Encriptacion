@@ -5,7 +5,7 @@ import { LogIn, ArrowLeft } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 interface LoginProps {
-  onLoginSuccess: (token: string, rol: string, sedeId: string) => void;
+  onLoginSuccess: (email: string, token: string, rol: string, sedeId: string) => void;
 }
 
 const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
@@ -27,7 +27,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://192.168.1.2:7096/api/Login/login', {
+      const response = await fetch('https://localhost:7096/api/User/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,7 +41,9 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
       }
 
       const data = await response.json();
-      onLoginSuccess(data.token, data.rol, data.sedeId);  // Agregar sedeId en la llamada
+      // Llamamos a onLoginSuccess con los datos que ahora el backend devuelve
+      onLoginSuccess(data.email, data.token, data.rol, data.sedeId); // Agregamos email, token, rol y sedeId
+
     } catch (err: any) {
       setError(err.message);
     }

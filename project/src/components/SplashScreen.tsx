@@ -6,7 +6,6 @@ import { Coffee, UserPlus, Users, LogIn } from 'lucide-react';
 const menuItems = [
   { title: 'Login', icon: LogIn, path: '/login', color: 'from-blue-500 to-blue-600' },
   { title: 'Register', icon: UserPlus, path: '/register', color: 'from-green-500 to-green-600' },
-  { title: 'Users', icon: Users, path: '/users', color: 'from-purple-500 to-purple-600' },
 ];
 
 const SplashScreen = () => {
