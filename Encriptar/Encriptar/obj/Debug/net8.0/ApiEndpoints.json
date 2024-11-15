@@ -64,6 +64,22 @@
   },
   {
     "ContainingType": "Encriptar.Controllers.UserController",
+    "Method": "Decrypt",
+    "RelativePath": "api/User/decrypt",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Encriptar.Controllers.UserController\u002BDecryptRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Encriptar.Controllers.UserController",
     "Method": "Login",
     "RelativePath": "api/User/login",
     "HttpMethod": "POST",

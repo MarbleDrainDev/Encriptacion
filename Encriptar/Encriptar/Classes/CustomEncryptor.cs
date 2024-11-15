@@ -1,62 +1,98 @@
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Encriptar.Classes
+public class CustomEncryptor
 {
-    public class CustomEncryptor
+    private readonly byte[] Key;
+    private readonly byte[] IV;
+
+    public CustomEncryptor(string key = null, string iv = null)
     {
-        // Método de rotación circular (Shift) de bits
-        private static char RotateBits(char c, int shift)
-        {
-            int bitCount = sizeof(char) * 8; // Número de bits en un char (16 bits para char)
-            int result = c;
-            result = (result << shift) | (result >> (bitCount - shift)); // Rotación circular
-            return (char)(result & 0xFFFF); // Limitar al rango de char (16 bits)
-        }
+        // Convertimos cualquier texto en una clave válida para AES
+        Key = GenerateKey(key ?? "clavePredeterminada");
+        IV = GenerateIV(iv ?? "ivPredeterminado");
+    }
 
-        // Método de sustitución simple (puedes reemplazarlo por algo más complejo si lo deseas)
-        private static char Substitute(char c, string key)
+    private byte[] GenerateKey(string key)
+    {
+        // Genera 32 bytes para la clave a partir del texto ingresado
+        using (SHA256 sha256 = SHA256.Create())
         {
-            int sumKey = 0;
-            foreach (char k in key)
-            {
-                sumKey += k; // Sumar valores ASCII de la clave
-            }
-            return (char)((c + sumKey) % 256); // Modificar el carácter con la suma de la clave
+            return sha256.ComputeHash(Encoding.UTF8.GetBytes(key));
         }
+    }
 
-        // Método para cifrar un texto utilizando el proceso complejo
-        public string Encrypt(string plainText)
+    private byte[] GenerateIV(string iv)
+    {
+        // Genera 16 bytes para el vector de inicialización a partir del texto ingresado
+        using (MD5 md5 = MD5.Create())
         {
-            string secretKey = "ClaveSuperSecreta"; // Clave secreta
-            char[] result = new char[plainText.Length];
-            for (int i = 0; i < plainText.Length; i++)
-            {
-                char currentChar = plainText[i];
-                int shiftAmount = secretKey[i % secretKey.Length]; // Usar la clave para determinar el desplazamiento
-                currentChar = RotateBits(currentChar, shiftAmount); // Rotación de bits
-                currentChar = Substitute(currentChar, secretKey); // Sustitución basada en la clave
-                result[i] = currentChar;
-            }
-            return new string(result);
+            return md5.ComputeHash(Encoding.UTF8.GetBytes(iv));
         }
+    }
 
-        // Método para descifrar el texto cifrado utilizando el proceso inverso
-        public string Decrypt(string cipherText)
+    public string Encrypt(string plainText)
+    {
+        if (string.IsNullOrEmpty(plainText))
+            throw new ArgumentException("El texto plano no puede estar vacío.", nameof(plainText));
+
+        try
         {
-            string secretKey = "ClaveSuperSecreta"; // Clave secreta
-            char[] result = new char[cipherText.Length];
-            for (int i = 0; i < cipherText.Length; i++)
+            using (Aes aesAlg = Aes.Create())
             {
-                char currentChar = cipherText[i];
-                int shiftAmount = secretKey[i % secretKey.Length];
-                currentChar = Substitute(currentChar, secretKey); // Invertir la sustitución
-                currentChar = RotateBits(currentChar, 16 - (shiftAmount % 16)); // Rotación inversa
-                result[i] = currentChar;
+                aesAlg.Key = Key;
+                aesAlg.IV = IV;
+                aesAlg.Mode = CipherMode.CBC; // Modo seguro
+                aesAlg.Padding = PaddingMode.PKCS7;
+
+                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+
+                using (MemoryStream msEncrypt = new MemoryStream())
+                {
+                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                    using (StreamWriter swEncrypt = new StreamWriter(csEncrypt, Encoding.UTF8))
+                    {
+                        swEncrypt.Write(plainText);
+                    }
+                    return Convert.ToBase64String(msEncrypt.ToArray());
+                }
             }
-            return new string(result);
+        }
+        catch (CryptographicException ex)
+        {
+            throw new InvalidOperationException("Error durante la encriptación.", ex);
+        }
+    }
+
+    public string Decrypt(string cipherText)
+    {
+        if (string.IsNullOrEmpty(cipherText))
+            throw new ArgumentException("El texto cifrado no puede estar vacío.", nameof(cipherText));
+
+        try
+        {
+            using (Aes aesAlg = Aes.Create())
+            {
+                aesAlg.Key = Key;
+                aesAlg.IV = IV;
+                aesAlg.Mode = CipherMode.CBC; // Modo seguro
+                aesAlg.Padding = PaddingMode.PKCS7;
+
+                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+
+                using (MemoryStream msDecrypt = new MemoryStream(Convert.FromBase64String(cipherText)))
+                using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                using (StreamReader srDecrypt = new StreamReader(csDecrypt, Encoding.UTF8))
+                {
+                    return srDecrypt.ReadToEnd();
+                }
+            }
+        }
+        catch (CryptographicException ex)
+        {
+            throw new InvalidOperationException("Error durante la desencriptación.", ex);
         }
     }
 }

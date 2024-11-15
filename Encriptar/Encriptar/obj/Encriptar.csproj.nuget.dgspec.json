@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jeyso\\Downloads\\Encriptacion\\Encriptar\\Encriptar\\Encriptar.csproj": {}
+    "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\DA\\Encriptacion\\Encriptar\\Encriptar\\Encriptar.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jeyso\\Downloads\\Encriptacion\\Encriptar\\Encriptar\\Encriptar.csproj": {
+    "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\DA\\Encriptacion\\Encriptar\\Encriptar\\Encriptar.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jeyso\\Downloads\\Encriptacion\\Encriptar\\Encriptar\\Encriptar.csproj",
+        "projectUniqueName": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\DA\\Encriptacion\\Encriptar\\Encriptar\\Encriptar.csproj",
         "projectName": "Encriptar",
-        "projectPath": "C:\\Users\\jeyso\\Downloads\\Encriptacion\\Encriptar\\Encriptar\\Encriptar.csproj",
-        "packagesPath": "C:\\Users\\jeyso\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jeyso\\Downloads\\Encriptacion\\Encriptar\\Encriptar\\obj\\",
+        "projectPath": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\DA\\Encriptacion\\Encriptar\\Encriptar\\Encriptar.csproj",
+        "packagesPath": "C:\\Users\\Trabajo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\DA\\Encriptacion\\Encriptar\\Encriptar\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\jeyso\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Trabajo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

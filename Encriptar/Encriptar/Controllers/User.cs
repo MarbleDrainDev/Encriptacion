@@ -25,8 +25,9 @@ namespace Encriptar.Controllers
         public async Task<IActionResult> Register([FromBody] User user)
         {
             // Cifrar la contraseña antes de guardarla en la base de datos
-            user.Password = _encryptor.Encrypt(user.Password);
+            user.Password = _encryptor.Encrypt(user.Password); // Asegúrate de que esto es lo que quieres
 
+            // Conexión a la base de datos y guardado
             using (var connection = new MySqlConnection(connectionString))
             {
                 await connection.OpenAsync();
@@ -42,6 +43,7 @@ namespace Encriptar.Controllers
 
             return Ok(new { user.Email });
         }
+
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] Classes.LoginRequest login)
@@ -89,9 +91,10 @@ namespace Encriptar.Controllers
                 return Unauthorized("Correo o contraseña incorrectos.");
             }
 
-            // Si el login es exitoso, retornamos el correo del usuario
-            return Ok(new { Email = login.Email });
+            // Si el login es exitoso, retornamos la contraseña cifrada del usuario
+            return Ok(new { EncryptedPassword = storedEncryptedPassword });
         }
+
 
 
 
@@ -197,5 +200,33 @@ namespace Encriptar.Controllers
 
             return Ok();
         }
+
+        [HttpPost("decrypt")]
+        public IActionResult Decrypt([FromBody] DecryptRequest request)
+        {
+            if (string.IsNullOrEmpty(request.EncryptedText))
+            {
+                return BadRequest("El texto encriptado es requerido.");
+            }
+
+            try
+            {
+                string decryptedText = _encryptor.Decrypt(request.EncryptedText);
+                return Ok(new { DecryptedText = decryptedText });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error al desencriptar el texto.");
+            }
+        }
+
+        public class DecryptRequest
+        {
+            public string EncryptedText { get; set; }
+        }
+
+
+
+
     }
 }
