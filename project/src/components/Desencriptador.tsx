@@ -5,6 +5,7 @@ import { Users, Pencil, Trash2, Plus, ArrowLeft } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const Desencriptador: React.FC = () => {
+    const navigate = useNavigate();
     const [encryptedText, setEncryptedText] = useState('');
     const [decryptedText, setDecryptedText] = useState('');
 
@@ -31,6 +32,13 @@ const Desencriptador: React.FC = () => {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
+            <button
+                onClick={() => navigate('/')}
+                className="mb-8 flex items-center text-gray-400 hover:text-white transition-colors"
+                >
+                <ArrowLeft className="w-5 h-5 mr-2" />
+                Back to Menu
+            </button>
             <div className="bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-lg p-8 shadow-2xl">
                 <h1 className="text-3xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
                     Desencriptador
