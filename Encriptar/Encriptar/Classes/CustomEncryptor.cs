@@ -3,76 +3,60 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-public class CustomEncryptor
-
+namespace Encriptar.Classes
 {
-    public string Encrypt(string password)
+    public class CustomEncryptor
     {
-        var binaryList = new List<string>();
-
-        for (int i = 0; i < password.Length; i++)
+        // Método de rotación circular (Shift) de bits
+        private static char RotateBits(char c, int shift)
         {
-            string binaryChar = Convert.ToString(password[i], 2).PadLeft(8, '0');
-            binaryList.Add(binaryChar);
+            int bitCount = sizeof(char) * 8; // Número de bits en un char (16 bits para char)
+            int result = c;
+            result = (result << shift) | (result >> (bitCount - shift)); // Rotación circular
+            return (char)(result & 0xFFFF); // Limitar al rango de char (16 bits)
         }
 
-        for (int i = 0; i < binaryList.Count; i++)
+        // Método de sustitución simple (puedes reemplazarlo por algo más complejo si lo deseas)
+        private static char Substitute(char c, string key)
         {
-            int current = Convert.ToInt32(binaryList[i], 2);
-            int next = Convert.ToInt32(binaryList[(i + 1) % binaryList.Count], 2);
-            binaryList[i] = Convert.ToString(current + next, 2).PadLeft(8, '0');
-        }
-
-        StringBuilder encrypted = new StringBuilder();
-        Random rand = new Random();
-
-        for (int i = 0; i < binaryList.Count; i++)
-        {
-            encrypted.Append(binaryList[i]);
-
-            if (rand.Next(0, 2) == 1)
+            int sumKey = 0;
+            foreach (char k in key)
             {
-                char charToInsert = (char)(password[i] + 1);
-                encrypted.Append(Convert.ToString(charToInsert, 2).PadLeft(8, '0'));
+                sumKey += k; // Sumar valores ASCII de la clave
             }
+            return (char)((c + sumKey) % 256); // Modificar el carácter con la suma de la clave
         }
 
-        return encrypted.ToString();
-    }
-
-    public string Decrypt(string encryptedPassword)
-    {
-        var binaryList = new List<string>();
-
-        for (int i = 0; i < encryptedPassword.Length; i += 8)
+        // Método para cifrar un texto utilizando el proceso complejo
+        public string Encrypt(string plainText)
         {
-            binaryList.Add(encryptedPassword.Substring(i, 8));
-        }
-
-        for (int i = binaryList.Count - 1; i > 0; i--)
-        {
-            int originalChar = Convert.ToInt32(binaryList[i - 1], 2);
-            int insertedChar = Convert.ToInt32(binaryList[i], 2);
-
-            if (insertedChar == originalChar + 1)
+            string secretKey = "ClaveSuperSecreta"; // Clave secreta
+            char[] result = new char[plainText.Length];
+            for (int i = 0; i < plainText.Length; i++)
             {
-                binaryList.RemoveAt(i);
+                char currentChar = plainText[i];
+                int shiftAmount = secretKey[i % secretKey.Length]; // Usar la clave para determinar el desplazamiento
+                currentChar = RotateBits(currentChar, shiftAmount); // Rotación de bits
+                currentChar = Substitute(currentChar, secretKey); // Sustitución basada en la clave
+                result[i] = currentChar;
             }
+            return new string(result);
         }
 
-        for (int i = binaryList.Count - 1; i >= 0; i--)
+        // Método para descifrar el texto cifrado utilizando el proceso inverso
+        public string Decrypt(string cipherText)
         {
-            int current = Convert.ToInt32(binaryList[i], 2);
-            int next = Convert.ToInt32(binaryList[(i + 1) % binaryList.Count], 2);
-            binaryList[i] = Convert.ToString(current - next, 2).PadLeft(8, '0');
+            string secretKey = "ClaveSuperSecreta"; // Clave secreta
+            char[] result = new char[cipherText.Length];
+            for (int i = 0; i < cipherText.Length; i++)
+            {
+                char currentChar = cipherText[i];
+                int shiftAmount = secretKey[i % secretKey.Length];
+                currentChar = Substitute(currentChar, secretKey); // Invertir la sustitución
+                currentChar = RotateBits(currentChar, 16 - (shiftAmount % 16)); // Rotación inversa
+                result[i] = currentChar;
+            }
+            return new string(result);
         }
-
-        StringBuilder originalPassword = new StringBuilder();
-
-        foreach (string binaryChar in binaryList)
-        {
-            originalPassword.Append((char)Convert.ToInt32(binaryChar, 2));
-        }
-        return originalPassword.ToString();
     }
 }

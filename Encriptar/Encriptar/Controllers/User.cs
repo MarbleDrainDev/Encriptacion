@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.Data;
 
 namespace Encriptar.Controllers
 {
@@ -12,7 +13,7 @@ namespace Encriptar.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly string connectionString = "Server=localhost;Database=Cafeteria;Uid=root;Pwd=1234;";
+        private readonly string connectionString = "Server=localhost;Database=Encrip;Uid=root;Pwd=1234;";
         private readonly CustomEncryptor _encryptor;
 
         public UserController()
@@ -23,6 +24,7 @@ namespace Encriptar.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] User user)
         {
+            // Cifrar la contraseña antes de guardarla en la base de datos
             user.Password = _encryptor.Encrypt(user.Password);
 
             using (var connection = new MySqlConnection(connectionString))
@@ -38,44 +40,59 @@ namespace Encriptar.Controllers
                 }
             }
 
-            return Ok(user);
+            return Ok(new { user.Email });
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] User login)
+        public async Task<IActionResult> Login([FromBody] Classes.LoginRequest login)
         {
-            User user = null;
+            // Validación básica de entrada
+            if (login == null || string.IsNullOrEmpty(login.Email) || string.IsNullOrEmpty(login.Password))
+            {
+                return BadRequest("Correo y contraseña son requeridos.");
+            }
+
+            // Buscar la contraseña cifrada del usuario en la base de datos
+            string storedEncryptedPassword = null;
 
             using (var connection = new MySqlConnection(connectionString))
             {
                 await connection.OpenAsync();
-                var query = "SELECT * FROM Users WHERE Email = @Email";
+                var query = "SELECT Password FROM Users WHERE Email = @Email";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Email", login.Email);
+
                     using (var reader = await command.ExecuteReaderAsync())
                     {
+                        // Si encontramos al usuario, obtenemos la contraseña cifrada
                         if (await reader.ReadAsync())
                         {
-                            user = new User
-                            {
-                                Id = reader.GetInt32("Id"),
-                                Name = reader.GetString("Name"),
-                                Email = reader.GetString("Email"),
-                                Password = reader.GetString("Password")
-                            };
+                            storedEncryptedPassword = reader.GetString("Password");
                         }
                     }
                 }
             }
 
-            if (user == null || _encryptor.Decrypt(user.Password) != login.Password)
+            // Si el correo no existe o la contraseña cifrada no se encuentra
+            if (storedEncryptedPassword == null)
             {
-                return Unauthorized();
+                return Unauthorized("Correo o contraseña incorrectos.");
             }
 
-            return Ok(user);
+            // Desencriptar la contraseña almacenada
+            string decryptedPassword = _encryptor.Decrypt(storedEncryptedPassword);
+
+            // Comparar la contraseña desencriptada con la que el usuario ingresó
+            if (decryptedPassword != login.Password)
+            {
+                return Unauthorized("Correo o contraseña incorrectos.");
+            }
+
+            // Si el login es exitoso, retornamos el correo del usuario
+            return Ok(new { Email = login.Email });
         }
+
 
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()

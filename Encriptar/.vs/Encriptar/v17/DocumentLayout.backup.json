@@ -1,7 +1,40 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{69DA8D5F-ED2F-4D3E-8CB2-1E0CD7FE48D1}|Encriptar\\Encriptar.csproj|c:\\users\\trabajo\\desktop\\todo\\uni\\encriptar\\encriptar\\classes\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69DA8D5F-ED2F-4D3E-8CB2-1E0CD7FE48D1}|Encriptar\\Encriptar.csproj|solutionrelative:encriptar\\classes\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69DA8D5F-ED2F-4D3E-8CB2-1E0CD7FE48D1}|Encriptar\\Encriptar.csproj|c:\\users\\trabajo\\desktop\\todo\\uni\\encriptar\\encriptar\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{69DA8D5F-ED2F-4D3E-8CB2-1E0CD7FE48D1}|Encriptar\\Encriptar.csproj|solutionrelative:encriptar\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69DA8D5F-ED2F-4D3E-8CB2-1E0CD7FE48D1}|Encriptar\\Encriptar.csproj|c:\\users\\trabajo\\desktop\\todo\\uni\\encriptar\\encriptar\\controllers\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69DA8D5F-ED2F-4D3E-8CB2-1E0CD7FE48D1}|Encriptar\\Encriptar.csproj|solutionrelative:encriptar\\controllers\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69DA8D5F-ED2F-4D3E-8CB2-1E0CD7FE48D1}|Encriptar\\Encriptar.csproj|c:\\users\\trabajo\\desktop\\todo\\uni\\encriptar\\encriptar\\classes\\customencryptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69DA8D5F-ED2F-4D3E-8CB2-1E0CD7FE48D1}|Encriptar\\Encriptar.csproj|solutionrelative:encriptar\\classes\\customencryptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69DA8D5F-ED2F-4D3E-8CB2-1E0CD7FE48D1}|Encriptar\\Encriptar.csproj|c:\\users\\trabajo\\desktop\\todo\\uni\\encriptar\\encriptar\\classes\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69DA8D5F-ED2F-4D3E-8CB2-1E0CD7FE48D1}|Encriptar\\Encriptar.csproj|solutionrelative:encriptar\\classes\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69DA8D5F-ED2F-4D3E-8CB2-1E0CD7FE48D1}|Encriptar\\Encriptar.csproj|c:\\users\\trabajo\\desktop\\todo\\uni\\encriptar\\encriptar\\encriptar.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{69DA8D5F-ED2F-4D3E-8CB2-1E0CD7FE48D1}|Encriptar\\Encriptar.csproj|solutionrelative:encriptar\\encriptar.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69DA8D5F-ED2F-4D3E-8CB2-1E0CD7FE48D1}|Encriptar\\Encriptar.csproj|c:\\users\\trabajo\\desktop\\todo\\uni\\encriptar\\encriptar\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69DA8D5F-ED2F-4D3E-8CB2-1E0CD7FE48D1}|Encriptar\\Encriptar.csproj|solutionrelative:encriptar\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69DA8D5F-ED2F-4D3E-8CB2-1E0CD7FE48D1}|Encriptar\\Encriptar.csproj|c:\\users\\trabajo\\desktop\\todo\\uni\\encriptar\\encriptar\\encriptar.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{69DA8D5F-ED2F-4D3E-8CB2-1E0CD7FE48D1}|Encriptar\\Encriptar.csproj|solutionrelative:encriptar\\encriptar.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +42,107 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LoginRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\Encriptar\\Classes\\LoginRequest.cs",
+              "RelativeDocumentMoniker": "Encriptar\\Classes\\LoginRequest.cs",
+              "ToolTip": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\Encriptar\\Classes\\LoginRequest.cs",
+              "RelativeToolTip": "Encriptar\\Classes\\LoginRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-15T05:38:38.78Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CustomEncryptor.cs",
+              "DocumentMoniker": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\Encriptar\\Classes\\CustomEncryptor.cs",
+              "RelativeDocumentMoniker": "Encriptar\\Classes\\CustomEncryptor.cs",
+              "ToolTip": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\Encriptar\\Classes\\CustomEncryptor.cs",
+              "RelativeToolTip": "Encriptar\\Classes\\CustomEncryptor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-15T04:41:18.752Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Encriptar.http",
+              "DocumentMoniker": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\Encriptar\\Encriptar.http",
+              "RelativeDocumentMoniker": "Encriptar\\Encriptar.http",
+              "ToolTip": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\Encriptar\\Encriptar.http",
+              "RelativeToolTip": "Encriptar\\Encriptar.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-11-15T00:57:43.879Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Encriptar",
+              "DocumentMoniker": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\Encriptar\\Encriptar.csproj",
+              "RelativeDocumentMoniker": "Encriptar\\Encriptar.csproj",
+              "ToolTip": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\Encriptar\\Encriptar.csproj",
+              "RelativeToolTip": "Encriptar\\Encriptar.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-11-15T00:51:58.981Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\Encriptar\\Controllers\\User.cs",
+              "RelativeDocumentMoniker": "Encriptar\\Controllers\\User.cs",
+              "ToolTip": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\Encriptar\\Controllers\\User.cs",
+              "RelativeToolTip": "Encriptar\\Controllers\\User.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAowEEAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T17:45:13.169Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\Encriptar\\Classes\\User.cs",
+              "RelativeDocumentMoniker": "Encriptar\\Classes\\User.cs",
+              "ToolTip": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\Encriptar\\Classes\\User.cs",
+              "RelativeToolTip": "Encriptar\\Classes\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T17:46:15.636Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\Encriptar\\Program.cs",
+              "RelativeDocumentMoniker": "Encriptar\\Program.cs",
+              "ToolTip": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\Encriptar\\Program.cs",
+              "RelativeToolTip": "Encriptar\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T17:39:31.392Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\Encriptar\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Encriptar\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\Trabajo\\Desktop\\Todo\\UNI\\Encriptar\\Encriptar\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Encriptar\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-15T00:52:01.093Z"
             },
             {
               "$type": "Bookmark",
