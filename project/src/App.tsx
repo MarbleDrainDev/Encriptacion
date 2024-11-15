@@ -3,6 +3,7 @@ import SplashScreen from './components/SplashScreen';
 import Login from './components/Login';
 import UserCRUD from './components/UserCRUD';
 import Register from './components/Register';
+import Desencriptador from './components/Desencriptador'; // Asegúrate de que esta importación sea correcta
 import { Toaster } from 'react-hot-toast';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/users" element={<UserCRUD />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/desencriptar" element={<Desencriptador />} />
         </Routes>
         <Toaster position="top-right" />
       </div>

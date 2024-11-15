@@ -3,9 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Coffee, UserPlus, Users, LogIn } from 'lucide-react';
 
+import { Code } from 'lucide-react';
+
 const menuItems = [
   { title: 'Login', icon: LogIn, path: '/login', color: 'from-blue-500 to-blue-600' },
   { title: 'Register', icon: UserPlus, path: '/register', color: 'from-green-500 to-green-600' },
+  // { title: 'Usuarios', icon: Code, path: '/users', color: 'from-yellow-500 to-yellow-600' },
+  { title: 'Desencriptar', icon: Code, path: '/desencriptar', color: 'from-red-500 to-red-600' },
 ];
 
 const SplashScreen = () => {

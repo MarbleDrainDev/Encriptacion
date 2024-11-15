@@ -4,17 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { LogIn, ArrowLeft } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-interface LoginProps {
-  onLoginSuccess: (email: string, token: string, rol: string, sedeId: string) => void;
-}
-
-const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
+const Login: React.FC = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
   const [error, setError] = useState('');
+  const [encryptedPassword, setEncryptedPassword] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -41,8 +38,8 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
       }
 
       const data = await response.json();
-      // Llamamos a onLoginSuccess con los datos que ahora el backend devuelve
-      onLoginSuccess(data.email, data.token, data.rol, data.sedeId); // Agregamos email, token, rol y sedeId
+      // Mostrar la contraseña encriptada
+      setEncryptedPassword(data.encryptedPassword);
 
     } catch (err: any) {
       setError(err.message);
@@ -99,6 +96,9 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
             </div>
 
             {error && <p className="text-red-500">{error}</p>}
+            {encryptedPassword && (
+              <p className="text-green-500">Encrypted Password: {encryptedPassword}</p>
+            )}
 
             <motion.button
               whileHover={{ scale: 1.05 }}

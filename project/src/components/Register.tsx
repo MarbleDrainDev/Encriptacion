@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserPlus, ArrowLeft } from 'lucide-react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -13,9 +12,9 @@ const Register = () => {
     password: '',
     confirmPassword: '',
   });
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validar si las contraseñas coinciden
@@ -26,14 +25,24 @@ const Register = () => {
 
     try {
       // Realizar la llamada a la API para registrar al usuario
-      const response = await axios.post('http://localhost:7096/api/User/register', {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password, // Solo enviar la contraseña
+      const response = await fetch('https://localhost:7096/api/User/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password, // Solo enviar la contraseña
+        }),
       });
 
-      toast.success('¡Registro exitoso!');
-      navigate('/'); // Redirigir al inicio o página de login después del registro exitoso
+      if (response.ok) {
+        toast.success('¡Registro exitoso!');
+        navigate('/'); // Redirigir al inicio o página de login después del registro exitoso
+      } else {
+        toast.error('¡Error al registrar! Por favor, intenta de nuevo.');
+      }
     } catch (error) {
       toast.error('¡Error al registrar! Por favor, intenta de nuevo.');
     }
